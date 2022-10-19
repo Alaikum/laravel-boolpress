@@ -49574,8 +49574,20 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
 });
+window.onscroll = function () {
+  myFunction();
+};
+function myFunction() {
+  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  var scrolled = winScroll / height * 100;
+  document.getElementById("myBar").style.width = scrolled + "%";
+}
 
 /***/ }),
 
