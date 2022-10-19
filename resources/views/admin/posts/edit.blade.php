@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1>Crea il post:</h1>
+                <h1>Modifica il post:</h1>
             </div>
         </div>
     </div>
@@ -17,13 +17,13 @@
                     @csrf
                     @method('PUT')
                     <p>
-                        <label for="title">titolo</label>
+                        <label for="title">Modifica Titolo</label>
                         <input type="text" name='title' id='title'
                         value="{{ old('title', $post->title)}}"
                             placeholder="titolo" >
                     </p>
                     <p>
-                        <label for="content">Contenuto</label>
+                        <label for="content">Modifica Contenuto</label>
                       <textarea name="content" id="content" cols="30" rows="20" placeholder="Contenuto del Post"
                       
                      >{{ old('content',$post->content)}}</textarea>
