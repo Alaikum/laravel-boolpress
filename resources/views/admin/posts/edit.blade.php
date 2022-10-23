@@ -28,6 +28,15 @@
                       
                      >{{ old('content',$post->content)}}</textarea>
                     </p>
+                    <label for="category">Categoria</label>
+                    <select name="category_id" id="" required value="{{old('category',$post->category)}}">
+                        <option value=" ">--nessuna--</option>
+                      @foreach ($categories as $category)
+                          
+                      <option @if(old('cateory_id')===$category->id) selected @endif value="{{$category->id}}">{{$category->name}}</option>
+                      @endforeach
+                
+                    </select>
                     <button type="submit" >Posta</button>
              </form>
               

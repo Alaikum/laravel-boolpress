@@ -18,6 +18,7 @@
                 <p>Slug:{{ $post->slug }}</p>
                 <p>Creato:{{ $post->created_at }}</p>
                 <p><strong>Post:</strong>{{ $post->content }}</p>
+                <p><strong>{{$post->category ? $post->category->name : 'nessuna categoria'}}</strong></p>
                     <a href="{{route('admin.posts.show',$post)}}">Dettaglio</a>
                     <a href="{{route('admin.posts.edit', $post)}}">Modifica</a>
                     <form action="{{ route('admin.posts.destroy',$post) }}" method="POST">

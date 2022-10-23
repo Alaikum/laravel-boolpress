@@ -18,6 +18,10 @@
                 <p>Slug:{{ $post->slug }}</p>
                 <p>Creato:{{ $post->created_at }}</p>
                 <p><strong>Post:</strong>{{ $post->content }}</p>
+                Categoria:
+                @if ($post->category)
+                    <p>{{ $post->category->name }}</p>
+                @endif
                 <a href="{{ route('admin.posts.edit', $post) }}">Modifica</a>
 
                 </form>
