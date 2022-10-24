@@ -22,9 +22,34 @@
                 @if ($post->category)
                     <p>{{ $post->category->name }}</p>
                 @endif
+                <ul>
+                    Tags:
+                    @forelse ($post->tags as $tag)
+                        {{-- @foreach ($post->tags as $tag) --}}
+
+                        <li> {{ $tag->name }}</li>
+                    @empty
+                        <li>nessuno</li>
+                    @endforelse
+                    {{-- @endforeach --}}
+                </ul>
                 <a href="{{ route('admin.posts.edit', $post) }}">Modifica</a>
 
                 </form>
+                <div class="row">
+                    <ul>
+                        @if ($post->category)
+                            @foreach ($post->category->posts()->where('id', '!=', $post->id)->get() as $releatedPost)
+                                <li>
+                                    <a href="{{ route('admin.posts.show', $releatedPost) }}">
+                                        {{ $releatedPost->title }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        @endif
+                    </ul>
+                </div>
+
                 <form action="{{ route('admin.posts.destroy', $post) }}" method="POST">
 
                     @csrf

@@ -70,6 +70,7 @@
                                     <a href="{{ url('/admin/home') }}">Home</a> 
                                     <a href="{{route('admin.posts.index')}}">Post</a> 
                                     <a href="{{route('admin.posts.create')}}">Crea</a>
+                                    {{-- <a href="{{route('admin.tags.show')}}">Tags</a> --}}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
