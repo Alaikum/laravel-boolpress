@@ -13,8 +13,18 @@
      
         <div class="row">
             <div class="col-12">
-                <form action="{{ route('admin.posts.store') }}" method="POST">
+                <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+
+                 
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="cover"  name="cover">
+                          <label class="custom-file-label" for="cover" aria-describedby="inputGroupFileAddon02">Scegli la cover</label>
+                        </div>
+                        
+                      </div>
+
                     <p>
                         <label for="title">titolo</label>
                         <input type="text" name='title' id='title'
@@ -23,7 +33,7 @@
                     </p>
                     <p>
                         <label for="content">Contenuto</label>
-                      <textarea name="content" id="content" cols="30" rows="20" placeholder="Contenuto del Post"
+                      <textarea name="content" id="content" cols="100" rows="20" placeholder="Contenuto del Post"
                       
                      >{{ old('content')}}</textarea>
                     </p>

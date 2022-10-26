@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -47,24 +48,19 @@ class PostController extends Controller
             'title' => 'required|max:255|min:3',
             'content' => 'required',
             'category_id' => 'nullable|exists:App\Category,id',
-            'tags.*' => 'exists:tags,id' //i valori esistono nella colonna id, niente nullable perchè non arrivono valori nulli
+            'tags.*' => 'exists:tags,id', //i valori esistono nella colonna id, niente nullable perchè non arrivono valori nulli
             //il .* serve per indicare meglio l errore
+            'cover' => 'nullable|image|max:2048'  //non supera i due mega, ragiona in kilobyte
         ]);
 
-        // $slug_base = Str::slug($params['title']);
-        // $slug=$slug_base;
-        // //controllare che sia unico
-        // //usando una query sql
-        // $post_esistente = Post::where('slug', $slug_base)->first();
-        // $counter = 1;
-        // //se il post esiste cambio slug e rifaccio la ricerca
-        // while ($post_esistente) {
-        //     $slug = $slug_base .'-'.$counter;
-        //     $post_esistente = Post::where('slug', $slug)->first();
-        //     $counter++;
-        // }
-        // $params['slug'] = $slug;
         $params['slug'] = Post::getUniqueSlugFromTitle($params['title']);
+
+        if (array_key_exists('cover', $params)) {
+
+            $img_path = Storage::put('post_covers', $request->file('cover'));
+
+            $params['cover'] = $img_path;
+        }
 
         $post = Post::create($params);
 
@@ -129,9 +125,9 @@ class PostController extends Controller
 
         if (array_key_exists('tags', $params)) {
             $post->tags()->sync($params['tags']);
-        }else{
+        } else {
             $post->tags()->sync([]); //o sync con array vuoto
-          //  $post->tags()->detach(); o detach con array vuoto
+            //  $post->tags()->detach(); o detach con array vuoto
         }
 
         return redirect()->route('admin.posts.show', $post);
@@ -145,7 +141,17 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        //così se elimino il post rimane comunque salvato il percoso per eliminare la cover
+        $cover = $post->cover;
         $post->delete();
+        //elimino la foto dopo l'eliminazione del post
+        if ($cover && Storage::exists($cover)) {
+            Storage::delete($cover);
+        }
+
+
+
+
         return redirect()->route('admin.posts.index');
     }
 }
