@@ -28,3 +28,12 @@ Route::middleware('auth')
     Route::resource('posts','PostController');
     Route::resource('tags','TagController')->only('show');
 });
+
+
+
+// UNA ROTTA CHE PRENDE TUTTE LE ROTTE NON REGISTRATE, va per forza alla fine
+// any è una qualcuasi parola, il ? serve per dire che può essere anche assente
+//il where  va a inserire ogni tipo di combinazione da 0 a più volte
+Route::get('{any?}',function(){
+    return view('guest.home');
+})->where('any','.*');
