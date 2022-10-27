@@ -10957,6 +10957,27 @@ a.text-dark:focus {
   width: 0%;
 }
 
+.cover__post {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: 1.5rem;
+  color: green;
+  flex-wrap: wrap;
+}
+
+.cover__post label:hover {
+  cursor: pointer;
+  border: 1px solid black;
+  background-color: brown;
+  color: white;
+}
+
+.cover__post .have__cover {
+  color: red;
+}
+
 .alert {
   background: red;
 }

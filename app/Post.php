@@ -12,7 +12,8 @@ class Post extends Model
         'title',
         'content',
         'slug',
-        'category_id'
+        'category_id',
+        'cover'
     ];
     public function category(){
         return $this->belongsTo('App\Category');
@@ -37,6 +38,10 @@ class Post extends Model
             $counter++;
         }
         return $slug;
+    }
+
+    public function getCoverPathAttribute(){
+        return asset('storage/'. $this->cover);
     }
 }
 

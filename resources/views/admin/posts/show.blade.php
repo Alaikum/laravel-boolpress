@@ -13,7 +13,7 @@
 
         <div class="row">
             <div class="col-12">
-
+                <img src="{{$post->cover_path}}" alt="">
                 <h2>{{ $post->title }}</h2>
                 <p>Slug:{{ $post->slug }}</p>
                 <p>Creato:{{ $post->created_at }}</p>
