@@ -19,7 +19,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::limit(150)->get();
+        $posts = Post::limit(150)->orderBy('id','desc')->get();
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -112,11 +112,19 @@ class PostController extends Controller
             'title' => 'required|max:255|min:3',
             'content' => 'required',
             'category_id' => 'nullable|exists:App\Category,id',
-            'tags.*' => 'exists:tags,id'
+            'tags.*' => 'exists:tags,id',
+            'cover' => 'nullable|image|max:2048'
         ]);
 
         if ($params['title'] !== $post->title) {
             $params['slug'] = Post::getUniqueSlugFromTitle($params['title']);
+        }
+        
+        if (array_key_exists('cover', $params)) {
+
+            $img_path = Storage::put('post_covers', $request->file('cover'));
+
+            $params['cover'] = $img_path;
         }
 
 
