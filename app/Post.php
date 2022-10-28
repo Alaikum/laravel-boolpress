@@ -41,7 +41,15 @@ class Post extends Model
     }
 
     public function getCoverPathAttribute(){
-        return asset('storage/'. $this->cover);
+        return $this->cover ?  asset('storage/'. $this->cover) : null;
     }
+
+    public function getDateAttribute()
+    {
+        return $this->created_at->format('d/m/Y');
+    }
+
+    //appendo cover path, per far arrivare la proprietà cover path
+    protected $appends = ['cover_path','date'];
 }
 

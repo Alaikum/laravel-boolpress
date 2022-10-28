@@ -28,7 +28,7 @@
 
     
     <!-- Scripts siccome c'è Vue va infondo al body-->
-    <script src="{{ asset('js/front.js') }}" defer></script>
+    <script src="{{ asset('js/front.js') }}" ></script>
 </body>
 
 </html>
