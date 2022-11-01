@@ -8,20 +8,17 @@
         </div>
         <div class="container">
 
-            <div>
+            <div class="cards">
                 <PostCard v-for='post in posts' :key='post.id' :post="post" />
             </div>
         </div>
 
         <div class="container">
             <!-- qui link delle pagine quindi avere totp post alle pagine -->
-            <ul>
+            <ul class="page">
                 <li :class="{
-                'active': page===currentPage
-            }"
-             v-for="page in lastPage" :key="page"
-            @click="fetchPosts(page)"
-          >{{page}}</li>
+                    'active': page === currentPage
+                }" v-for="page in lastPage" :key="page" @click="fetchPosts(page)">{{ page }}</li>
             </ul>
         </div>
     </div>
@@ -41,27 +38,27 @@ export default {
         return {
             title: 'Js disse: Sono Tornatoooooooooo',
             posts: [],
-            currentPage:1,
-            lastPage:0,
-            total:0
+            currentPage: 1,
+            lastPage: 0,
+            total: 0
         }
     },
     methods: {
-        fetchPosts(page= 1) {
-            axios.get('/api/posts',{
-                params:{
-                    page:page
-                } 
+        fetchPosts(page = 1) {
+            axios.get('/api/posts', {
+                params: {
+                    page: page
+                }
             }).then((res) => {
 
                 // const { posts } = res.data
                 // this.posts = posts
                 console.log(res.data)
-                const { data, current_page, last_page, total}=res.data.result
-                this.posts=data
-                this.lastPage=last_page
-                this.currentPage=current_page
-                this.total=total
+                const { data, current_page, last_page, total } = res.data.result
+                this.posts = data
+                this.lastPage = last_page
+                this.currentPage = current_page
+                this.total = total
                 console.log(this.currentPage)
 
             })
@@ -80,9 +77,37 @@ export default {
 
 
 <style scoped lang="scss">
+.cards {
 
-.active{
+    text-align: center;
+}
+
+.active {
     background-color: yellowgreen;
+}
+
+.page {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+
+    li {
+        border: 1px solid black;
+        padding: 10px;
+        border-radius: 15px;
+        font-size: 2rem;
+        &:hover{
+            cursor: pointer;
+            background-color: yellowgreen;
+            scale: 1.5;
+            color: white;
+            
+
+        }
+       
+
+    }
+    
 }
 </style>
 
