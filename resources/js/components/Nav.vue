@@ -8,6 +8,7 @@
                     <h2 class="logo">Logo</h2>
                 </li>
                 <li 
+                
                  v-for="(link, i) in navLinks" :key="i">
                     <router-link :to="{ name: link.name }">{{ link.text }}</router-link>
                 </li>
@@ -24,6 +25,8 @@
 export default {
     data() {
         return {
+          
+         
             navLinks: [
                 {
                     text: 'Home',
@@ -57,4 +60,5 @@ ul {
     font-size: 1.5rem;
   
 }
+
 </style>
