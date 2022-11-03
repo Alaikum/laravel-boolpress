@@ -16,4 +16,9 @@
   </script>
   
   <style lang="scss" scoped>
+  ul{
+    list-style: none;
+    font-size: 1.5rem;
+    color: brown;
+  }
   </style>

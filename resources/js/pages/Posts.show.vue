@@ -1,17 +1,19 @@
 <template>
-    <div v-if="post">
+    <div class="posts__show" v-if="post" :style="{ backgroundImage: `url(${post.cover_path})` }">
         <section>
             <div class="container">
                 <h1>dettaglio articolo</h1>
                 <!-- <p>{{$scopedSlots.params.slug}}</p> -->
                 <p>{{ slug }}</p>
-            </div>
+                <!-- <img v-if="post.cover" :src="post.cover_path" alt=""> -->
 
-            <h3>Titolo del post :{{ post.title }}</h3>
-            <p>Creato il{{ post.date }}</p>
-            <h4 v-if="post.category">Categoria={{ post.category?.name }}</h4>
-            <Tags :tags="post.tags"/>
-            Contenuto: <div v-html="post.content"> </div>
+
+                <h3>Titolo del post : {{ post.title }}</h3>
+                <p>Creato il {{ post.date }}</p>
+                <h4 v-if="post.category">Categoria={{ post.category?.name }}</h4>
+                <Tags :tags="post.tags" />
+                Contenuto: <div v-html="post.content"> </div>
+            </div>
         </section>
     </div>
 </template>
@@ -56,3 +58,13 @@ export default {
 }
 </script>
  
+<style scoped lang="scss">
+.posts__show {
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    background-position: center;
+
+
+}
+</style>
